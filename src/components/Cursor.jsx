@@ -30,28 +30,29 @@ export default function Cursor() {
     // Hover effects on interactive elements
     const onEnter = () => {
       if (ringRef.current) {
-        ringRef.current.style.width = '50px';
-        ringRef.current.style.height = '50px';
-        ringRef.current.style.borderColor = 'rgba(0,245,255,0.8)';
-        ringRef.current.style.marginLeft = '-25px';
-        ringRef.current.style.marginTop = '-25px';
+        ringRef.current.style.width = '48px';
+        ringRef.current.style.height = '48px';
+        ringRef.current.style.borderColor = 'rgba(201,168,76,0.9)';
+        ringRef.current.style.background = 'rgba(201,168,76,0.05)';
       }
     };
     const onLeave = () => {
       if (ringRef.current) {
         ringRef.current.style.width = '32px';
         ringRef.current.style.height = '32px';
-        ringRef.current.style.borderColor = 'rgba(0,245,255,0.4)';
-        ringRef.current.style.marginLeft = '0';
-        ringRef.current.style.marginTop = '0';
+        ringRef.current.style.borderColor = 'rgba(201,168,76,0.4)';
+        ringRef.current.style.background = 'transparent';
       }
     };
 
-    const interactives = document.querySelectorAll('button, a, [role="button"]');
-    interactives.forEach(el => {
-      el.addEventListener('mouseenter', onEnter);
-      el.addEventListener('mouseleave', onLeave);
-    });
+    const attach = () => {
+      const interactives = document.querySelectorAll('button, a, [role="button"]');
+      interactives.forEach(el => {
+        el.addEventListener('mouseenter', onEnter);
+        el.addEventListener('mouseleave', onLeave);
+      });
+    };
+    attach();
 
     return () => {
       cancelAnimationFrame(raf);
@@ -64,13 +65,15 @@ export default function Cursor() {
       <div ref={dotRef} style={{
         position: 'fixed', top: 0, left: 0, zIndex: 9999, pointerEvents: 'none',
         width: '8px', height: '8px', borderRadius: '50%',
-        background: '#00f5ff', boxShadow: '0 0 10px #00f5ff, 0 0 20px rgba(0,245,255,0.5)',
+        background: '#c9a84c',
+        boxShadow: '0 0 8px rgba(201,168,76,0.8), 0 0 16px rgba(201,168,76,0.3)',
       }} />
       <div ref={ringRef} style={{
         position: 'fixed', top: 0, left: 0, zIndex: 9998, pointerEvents: 'none',
         width: '32px', height: '32px', borderRadius: '50%',
-        border: '1px solid rgba(0,245,255,0.4)',
-        transition: 'width 0.2s, height 0.2s, border-color 0.2s',
+        border: '1px solid rgba(201,168,76,0.4)',
+        background: 'transparent',
+        transition: 'width 0.2s, height 0.2s, border-color 0.2s, background 0.2s',
       }} />
     </>
   );

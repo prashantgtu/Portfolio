@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import './index.css';
 import Bootloader from './components/Bootloader';
 import Navbar from './components/Navbar';
@@ -11,11 +11,24 @@ import Achievements from './components/Achievements';
 import Contact from './components/Contact';
 import Cursor from './components/Cursor';
 
+export const ThemeContext = createContext({ theme: 'dark', toggle: () => {} });
+export const useTheme = () => useContext(ThemeContext);
+
 export default function App() {
   const [booted, setBooted] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('pk-theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('pk-theme', theme);
+  }, [theme]);
+
+  const toggle = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
 
   return (
-    <>
+    <ThemeContext.Provider value={{ theme, toggle }}>
       <Cursor />
       <Bootloader onDone={() => setBooted(true)} />
       {booted && (
@@ -38,6 +51,6 @@ export default function App() {
           </main>
         </>
       )}
-    </>
+    </ThemeContext.Provider>
   );
 }

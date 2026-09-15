@@ -1,12 +1,29 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../App';
 
 const links = ['About','Skills','Projects','Experience','Achievements','Contact'];
+
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+    </svg>
+  );
+}
+function MoonIcon() {
+  return (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  );
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
+  const { theme, toggle } = useTheme();
 
   useEffect(() => {
     const fn = () => {
@@ -22,34 +39,45 @@ export default function Navbar() {
 
   const go = (id) => { document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior:'smooth' }); setOpen(false); };
 
+  const navBg = theme === 'dark'
+    ? scrolled ? 'rgba(10,10,10,0.96)' : 'transparent'
+    : scrolled ? 'rgba(250,246,238,0.96)' : 'transparent';
+
+  const borderB = scrolled
+    ? `1px solid var(--border)`
+    : '1px solid transparent';
+
   return (
     <motion.nav initial={{y:-80,opacity:0}} animate={{y:0,opacity:1}}
       transition={{duration:0.85,ease:[0.22,1,0.36,1]}}
       style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,
-        background: scrolled?'rgba(1,3,6,0.95)':'transparent',
-        backdropFilter: scrolled?'blur(22px)':'none',
-        borderBottom: scrolled?'1px solid rgba(0,245,255,0.07)':'1px solid transparent',
-        boxShadow: scrolled?'0 4px 40px rgba(0,0,0,0.5)':'none',
+        background: navBg,
+        backdropFilter: scrolled ? 'blur(24px)' : 'none',
+        borderBottom: borderB,
+        boxShadow: scrolled ? '0 4px 32px var(--shadow)' : 'none',
         transition:'all 0.35s ease' }}>
 
-      <div className="wrap" style={{ display:'flex',alignItems:'center',justifyContent:'space-between',height:62 }}>
+      <div className="wrap" style={{ display:'flex',alignItems:'center',justifyContent:'space-between',height:64 }}>
+
         {/* Logo */}
         <button onClick={()=>window.scrollTo({top:0,behavior:'smooth'})}
-          style={{ display:'flex',alignItems:'center',gap:'0.6rem',background:'none',border:'none',cursor:'pointer',padding:0 }}>
-          <svg viewBox="0 0 36 36" style={{ width:30,height:30,flexShrink:0 }}>
-            <rect x="5" y="5" width="26" height="26" rx="4" fill="none" stroke="#00f5ff" strokeWidth="1.2" opacity="0.7"/>
-            <rect x="10" y="10" width="16" height="16" rx="2.5" fill="rgba(0,245,255,0.06)" stroke="#0080ff" strokeWidth="0.8"/>
-            <circle cx="18" cy="18" r="2.6" fill="#00f5ff"/>
-            {[14,22].flatMap(v=>[
-              <line key={`l${v}`} x1="5" y1={v} x2="1" y2={v} stroke="#00f5ff" strokeWidth="0.8"/>,
-              <line key={`r${v}`} x1="31" y1={v} x2="35" y2={v} stroke="#00f5ff" strokeWidth="0.8"/>,
-              <line key={`t${v}`} x1={v} y1="5" x2={v} y2="1" stroke="#00f5ff" strokeWidth="0.8"/>,
-              <line key={`b${v}`} x1={v} y1="31" x2={v} y2="35" stroke="#00f5ff" strokeWidth="0.8"/>,
-            ])}
-          </svg>
+          style={{ display:'flex',alignItems:'center',gap:'0.7rem',background:'none',border:'none',cursor:'pointer',padding:0 }}>
+          {/* Elegant monogram logo */}
+          <div style={{
+            width:34, height:34, borderRadius:8,
+            background:`linear-gradient(135deg, var(--gold-dim), var(--gold))`,
+            display:'flex', alignItems:'center', justifyContent:'center',
+            boxShadow:'0 2px 12px var(--accent-glow)',
+            flexShrink:0
+          }}>
+            <span className="font-disp" style={{
+              color: theme === 'dark' ? '#0a0805' : '#fff8ee',
+              fontSize:'1rem', fontWeight:700, lineHeight:1, userSelect:'none'
+            }}>P</span>
+          </div>
           <div>
-            <div className="font-disp" style={{ fontWeight:700,fontSize:'0.95rem',color:'#00f5ff',letterSpacing:'0.06em',lineHeight:1 }}>Prashant Kushwaha</div>
-            <div className="font-mono" style={{ fontSize:'0.52rem',color:'#1f3d52',letterSpacing:'0.08em',marginTop:1 }}>ECE_PORTFOLIO_v2.1</div>
+            <div className="font-disp" style={{ fontWeight:700,fontSize:'0.95rem',color:'var(--t1)',letterSpacing:'0.01em',lineHeight:1 }}>Prashant Kushwaha</div>
+            <div className="font-mono" style={{ fontSize:'0.52rem',color:'var(--t4)',letterSpacing:'0.08em',marginTop:2 }}>ECE · CLASS OF 2027</div>
           </div>
         </button>
 
@@ -59,29 +87,39 @@ export default function Navbar() {
             <button key={l} className={`nav-a ${active===l.toLowerCase()?'active':''}`}
               onClick={()=>go(l)}>{l}</button>
           ))}
+
+          {/* Theme toggle */}
+          <button className="theme-toggle" onClick={toggle} title={`Switch to ${theme==='dark'?'light':'dark'} theme`}>
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
+
           <button className="btn btn-c" style={{ padding:'0.5rem 1.3rem',fontSize:'0.7rem' }}
             onClick={()=>window.open('https://drive.google.com/file/d/1hwMGWyN-soHLZIoj4Uedsd3zG_KvYSHz/view?usp=sharing','_blank')}>↓ Resume</button>
         </div>
 
-        {/* Hamburger */}
-        <button onClick={()=>setOpen(!open)} style={{ background:'none',border:'none',cursor:'pointer',padding:6,display:'flex',flexDirection:'column',gap:5 }}
-          className="hide-desktop">
-          {[0,1,2].map(i=>(
-            <span key={i} style={{ display:'block',width:20,height:1.5,background:'#00f5ff',borderRadius:2,transition:'all 0.28s',
-              opacity:open&&i===1?0:1, transform:open?(i===0?'rotate(45deg) translate(4.5px,4.5px)':i===2?'rotate(-45deg) translate(4.5px,-4.5px)':''):'', }}/>
-          ))}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div style={{display:'flex',alignItems:'center',gap:'0.6rem'}} className="hide-desktop">
+          <button className="theme-toggle" onClick={toggle} title="Toggle theme">
+            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+          </button>
+          <button onClick={()=>setOpen(!open)} style={{ background:'none',border:'none',cursor:'pointer',padding:6,display:'flex',flexDirection:'column',gap:5 }}>
+            {[0,1,2].map(i=>(
+              <span key={i} style={{ display:'block',width:20,height:1.5,background:'var(--gold)',borderRadius:2,transition:'all 0.28s',
+                opacity:open&&i===1?0:1, transform:open?(i===0?'rotate(45deg) translate(4.5px,4.5px)':i===2?'rotate(-45deg) translate(4.5px,-4.5px)':''):'', }}/>
+            ))}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div initial={{opacity:0,height:0}} animate={{opacity:1,height:'auto'}} exit={{opacity:0,height:0}}
-            style={{ background:'rgba(1,3,6,0.97)',borderTop:'1px solid rgba(0,245,255,0.07)',overflow:'hidden' }}>
+            style={{ background: theme==='dark'?'rgba(10,10,10,0.98)':'rgba(250,246,238,0.98)', borderTop:'1px solid var(--border)',overflow:'hidden' }}>
             <div className="wrap" style={{ paddingBlock:'1rem 1.5rem',display:'flex',flexDirection:'column',gap:0 }}>
               {links.map(l=>(
                 <button key={l} className="nav-a" onClick={()=>go(l)}
-                  style={{ textAlign:'left',padding:'0.7rem 0',borderBottom:'1px solid rgba(0,245,255,0.06)',fontSize:'0.95rem' }}>
+                  style={{ textAlign:'left',padding:'0.7rem 0',borderBottom:'1px solid var(--border)',fontSize:'0.9rem' }}>
                   {l}
                 </button>
               ))}
@@ -91,7 +129,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-      <style>{`.hide-desktop{display:flex}@media(min-width:768px){.hide-desktop{display:none}}`}</style>
     </motion.nav>
   );
 }
