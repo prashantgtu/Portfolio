@@ -94,7 +94,7 @@ export default function Navbar() {
           </button>
 
           <button className="btn btn-c" style={{ padding:'0.5rem 1.3rem',fontSize:'0.7rem' }}
-            onClick={()=>window.open('https://drive.google.com/file/d/1hwMGWyN-soHLZIoj4Uedsd3zG_KvYSHz/view?usp=sharing','_blank')}>↓ Resume</button>
+            onClick={()=>window.open('https://drive.google.com/file/d/1f-kH1l7rTMkBI8WvqLy3bTShKiDN-Q5n/view?usp=drive_link','_blank')}>↓ Resume</button>
         </div>
 
         {/* Mobile: theme toggle + hamburger */}

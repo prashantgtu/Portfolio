@@ -6,8 +6,8 @@ const f=(d=0)=>({initial:{opacity:0,y:26,scale:.96},whileInView:{opacity:1,y:0,s
 
 const items=[
   {icon:'📜',title:'CS50 — Introduction to Programming with Python',org:'Harvard University',year:'2024',c:'var(--gold)',desc:'Comprehensive introduction to Python programming, algorithms, and problem-solving.'},
-  {icon:'📜',title:'OCI GenAI Professional',org:'Oracle University',year:'2025',c:'var(--amber)',desc:'Certified in Generative AI fundamentals and Oracle Cloud Infrastructure AI services.'},
-  {icon:'📜',title:'OCI Data Science Professional',org:'Oracle University',year:'2025',c:'var(--copper)',desc:'Data science foundations, machine learning workflows, and Oracle AI platform.'},
+  {icon:'📜',title:'Semiconductor Process Technology and Packaging',org:'Department of Electronics, Sardar Vallabhbhai National Institute of Technology (SVNIT), Surat',year:'2025',c:'var(--amber)',desc:'Focused training on semiconductor fabrication, process technology, and advanced packaging concepts.'},
+  {icon:'📜',title:'OCI GenAI Professional',org:'Oracle University',year:'2025',c:'var(--copper)',desc:'Certified in Generative AI fundamentals and Oracle Cloud Infrastructure AI services.'},
 ];
 
 export default function Achievements(){

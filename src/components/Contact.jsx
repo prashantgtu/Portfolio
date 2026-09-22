@@ -77,7 +77,7 @@ export default function Contact(){
               One-page resume · ECE coursework · projects · experience · ATS-optimised.
             </p>
             <button className="btn btn-c" style={{fontSize:'.88rem',padding:'.9rem 2.6rem'}}
-              onClick={()=>window.open('https://drive.google.com/file/d/1hwMGWyN-soHLZIoj4Uedsd3zG_KvYSHz/view?usp=sharing','_blank')}>↓ Download Resume (PDF)</button>
+              onClick={()=>window.open('https://drive.google.com/file/d/1f-kH1l7rTMkBI8WvqLy3bTShKiDN-Q5n/view?usp=drive_link','_blank')}>↓ Download Resume (PDF)</button>
           </motion.div>
         </div>
       </section>
