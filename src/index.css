@@ -410,3 +410,41 @@ body {
 @media(min-width:769px) and (max-width:1023px){
   .hide-tablet { display: none !important }
 }
+
+/* ─── Skip to Content (Accessibility / SEO) ─── */
+.skip-to-content {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  padding: 0.8rem 2rem;
+  background: var(--gold);
+  color: #0a0805;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+  font-family: 'Inter', sans-serif;
+}
+.skip-to-content:focus {
+  top: 0;
+  outline: 2px solid var(--gold-light);
+  outline-offset: 2px;
+}
+
+/* ─── Image SEO / Performance ─── */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ─── Print styles for SEO (search engines sometimes render print) ─── */
+@media print {
+  body { background: #fff; color: #000; }
+  .divider, nav, .skip-to-content { display: none; }
+  section { page-break-inside: avoid; break-inside: avoid; }
+  a[href]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: #555; }
+}

@@ -42,7 +42,7 @@ export default function Hero() {
     : 'linear-gradient(145deg, #f8f3e8 0%, #fdf8ee 55%, #f5edd8 100%)';
 
   return (
-    <section id="hero" ref={heroRef}
+    <section id="hero" ref={heroRef} aria-label="Introduction - Prashant Kushwaha ECE Portfolio"
       style={{ position:'relative', minHeight:'100svh', display:'flex', alignItems:'center',
         overflow:'hidden', background: heroBg }}>
 

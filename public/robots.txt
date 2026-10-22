@@ -1,0 +1,11 @@
+# robots.txt for Prashant Kushwaha Portfolio
+# https://prashantgtu.github.io/Portfolio/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://prashantgtu.github.io/Portfolio/sitemap.xml
+
+# Crawl-delay (optional, be gentle on GitHub Pages)
+Crawl-delay: 1

@@ -63,7 +63,7 @@ export default function Contact(){
           <div style={{display:'grid',gap:'1rem',marginBottom:'1.5rem'}} className="contact-grid">
             {cards.map((c,i)=>(
               <motion.div key={c.label} {...f(.1+i*.09)}>
-                {c.link?<a href={c.link} target="_blank" rel="noopener noreferrer" style={{display:'block',textDecoration:'none'}}><CCard c={c}/></a>:<CCard c={c}/>}
+              {c.link?<a href={c.link} target="_blank" rel="noopener noreferrer" aria-label={`${c.label}: ${c.val}`} style={{display:'block',textDecoration:'none'}}><CCard c={c}/></a>:<CCard c={c}/>}
               </motion.div>
             ))}
           </div>
@@ -82,7 +82,7 @@ export default function Contact(){
         </div>
       </section>
 
-      <footer style={{background: footerBg, borderTop:'1px solid var(--border)', padding:'2rem clamp(1rem,4vw,2.5rem)'}}>
+      <footer role="contentinfo" style={{background: footerBg, borderTop:'1px solid var(--border)', padding:'2rem clamp(1rem,4vw,2.5rem)'}}>
         <div style={{maxWidth:'var(--max-w)',margin:'0 auto',display:'flex',flexWrap:'wrap',alignItems:'center',justifyContent:'space-between',gap:'.8rem'}}>
           <div>
             <div className="font-disp grad-gold" style={{fontWeight:700,fontSize:'.95rem'}}>Prashant Kushwaha</div>
@@ -93,7 +93,7 @@ export default function Contact(){
             Crafted with care & curiosity ✦
             <span style={{width:16,height:1,background:'var(--border)',display:'inline-block'}}/>
           </div>
-          <div className="font-mono" style={{fontSize:'.52rem',color:'var(--t4)'}}>©{new Date().getFullYear()} · Built with circuits & caffeine ⚡</div>
+          <div className="font-mono" style={{fontSize:'.52rem',color:'var(--t4)'}}>©{new Date().getFullYear()} Prashant Kushwaha · Built with circuits & caffeine ⚡</div>
         </div>
       </footer>
       <style>{`@media(min-width:580px){.contact-grid{grid-template-columns:1fr 1fr}}`}</style>

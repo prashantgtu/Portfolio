@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — Prashant Kushwaha Portfolio</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <script>
+    // GitHub Pages SPA redirect
+    // Converts the path into a query parameter so the main index.html can handle it
+    var pathSegmentsToKeep = 1; // '/Portfolio/' has 1 segment
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+      l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+      (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+      l.hash
+    );
+  </script>
+  <style>
+    body {
+      background: #020408;
+      color: #c9a84c;
+      font-family: 'Inter', system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    p { color: #999; font-size: 0.95rem; }
+    a { color: #c9a84c; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>404 — Page Not Found</h1>
+    <p>Redirecting you to the portfolio...</p>
+    <p><a href="/Portfolio/">← Go to Portfolio</a></p>
+  </div>
+</body>
+</html>

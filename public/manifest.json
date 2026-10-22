@@ -1,0 +1,21 @@
+{
+  "name": "Prashant Kushwaha — ECE Portfolio",
+  "short_name": "PK Portfolio",
+  "description": "Portfolio of Prashant Kushwaha — ECE student specializing in embedded systems, IoT, signal processing, and VLSI design.",
+  "start_url": "/Portfolio/",
+  "scope": "/Portfolio/",
+  "display": "standalone",
+  "background_color": "#020408",
+  "theme_color": "#c9a84c",
+  "orientation": "portrait-primary",
+  "lang": "en-IN",
+  "categories": ["education", "portfolio"],
+  "icons": [
+    {
+      "src": "/Portfolio/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

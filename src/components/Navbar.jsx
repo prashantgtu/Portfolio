@@ -48,14 +48,16 @@ export default function Navbar() {
     : '1px solid transparent';
 
   return (
-    <motion.nav initial={{y:-80,opacity:0}} animate={{y:0,opacity:1}}
+    <motion.header initial={{y:-80,opacity:0}} animate={{y:0,opacity:1}}
       transition={{duration:0.85,ease:[0.22,1,0.36,1]}}
+      role="banner"
       style={{ position:'fixed',top:0,left:0,right:0,zIndex:200,
         background: navBg,
         backdropFilter: scrolled ? 'blur(24px)' : 'none',
         borderBottom: borderB,
         boxShadow: scrolled ? '0 4px 32px var(--shadow)' : 'none',
         transition:'all 0.35s ease' }}>
+    <nav aria-label="Main navigation">
 
       <div className="wrap" style={{ display:'flex',alignItems:'center',justifyContent:'space-between',height:64 }}>
 
@@ -85,15 +87,17 @@ export default function Navbar() {
         <div style={{ display:'flex',alignItems:'center',gap:'1.8rem' }} className="hide-mobile">
           {links.map(l=>(
             <button key={l} className={`nav-a ${active===l.toLowerCase()?'active':''}`}
+              aria-current={active===l.toLowerCase() ? 'true' : undefined}
               onClick={()=>go(l)}>{l}</button>
           ))}
 
           {/* Theme toggle */}
-          <button className="theme-toggle" onClick={toggle} title={`Switch to ${theme==='dark'?'light':'dark'} theme`}>
+          <button className="theme-toggle" onClick={toggle} title={`Switch to ${theme==='dark'?'light':'dark'} theme`} aria-label={`Switch to ${theme==='dark'?'light':'dark'} theme`}>
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
 
           <button className="btn btn-c" style={{ padding:'0.5rem 1.3rem',fontSize:'0.7rem' }}
+            aria-label="Download Resume (PDF)"
             onClick={()=>window.open('https://drive.google.com/file/d/1f-kH1l7rTMkBI8WvqLy3bTShKiDN-Q5n/view?usp=drive_link','_blank')}>↓ Resume</button>
         </div>
 
@@ -129,6 +133,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
+    </motion.header>
   );
 }
